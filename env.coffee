@@ -9,7 +9,7 @@ env =
 		admin:	'Admin'
 	serverUrl:	serverUrl		# app server url
 	path:		envClient.path
-	dbUrl:		"mongodb://#{envClient.proj}rw:password@localhost/#{envClient.proj}"
+	dbUrl:		"mongodb://mobilerw:password@localhost/mobile"
 	oauth2:
 		authorizationURL:	"#{url}/oauth2/authorize/"
 		tokenURL:			"#{url}/oauth2/token/"
