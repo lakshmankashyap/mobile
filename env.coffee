@@ -19,8 +19,8 @@ env =
 		provider:			require 'passport-ttsoon'
 		authURL:			"/auth/provider"
 		cbURL:				"/auth/provider/callback"
-		clientID:			"#{envClient.proj}DEVAuth"
-		clientSecret:		'pass1234'
+		clientID:			"mobileDEVAuth"
+		clientSecret:		'password'
 		scope:		[
 			"https://#{envClient.oauth2.authServer}/org/users"
 		]

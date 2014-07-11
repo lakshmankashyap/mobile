@@ -18,6 +18,7 @@ Configuration
 *   cd mobile
 *   npm install
 *	create mongo database
+*	create api key for authorization code and implicit grant in authentication server
 *	update environment variable PORT in start.sh
     
 ```
@@ -29,11 +30,16 @@ Configuration
 ```
     proj = 'mobile'
 	authServer = 'mob.myvnc.com'
+	env =
+		clientID:		"mobile"
 ```
 
 *	update environment variable serverUrl and dbUrl in env.coffee
 
 ```
 	serverUrl =	"http://localhost:3000/#{envClient.proj}"
-	dbUrl:		"mongodb://#{envClient.proj}rw:password@localhost/#{encClient.proj}"
+	env =
+		dbUrl:			"mongodb://mobilerw:password@localhost/mobile"
+		clientID:		"mobileAuth"
+		clientSecret:	'password'	
 ```

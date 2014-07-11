@@ -7,7 +7,7 @@ env =
 		url:	"https://#{authServer}/org/api/users/"
 	path:		"/#{proj}"
 	oauth2:
-		clientID:		"#{proj}DEV"
+		clientID:		"mobileDEV"
 		authServer:		authServer
 		authUrl:		"https://#{authServer}/org/oauth2/authorize/"
 		scope:			[
