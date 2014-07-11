@@ -31,7 +31,7 @@ Configuration
 	authServer = 'mob.myvnc.com'
 ```
 
-*	update environment variable serverUrl in env.coffee
+*	update environment variable serverUrl and dbUrl in env.coffee
 
 ```
 	serverUrl =	"http://localhost:3000/#{envClient.proj}"

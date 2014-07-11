@@ -1,5 +1,6 @@
 /node_modules
 /bower_components
+/template
 /.project
 /npm-debug.log
 /stdout.log
