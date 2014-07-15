@@ -12,7 +12,7 @@ env =
 		authUrl:		"https://#{authServer}/org/oauth2/authorize/"
 		scope:			[
 			"https://#{authServer}/org/users",
-			"https://#{authServer}/file"
+			"https://#{authServer}/mobile/device"
 		]
 	flash:
 		timeout:	5000		# ms	

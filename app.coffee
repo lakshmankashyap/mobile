@@ -1,5 +1,6 @@
 envClient = require './client/env.coffee'
 env = require './env.coffee'
+path = require 'path'
 passport = require 'passport'
 bearer = require 'passport-http-bearer'
 logger = env.log4js.getLogger('app.coffee')
@@ -7,6 +8,7 @@ fs = require 'fs'
 http = require 'needle'
 _ = require 'underscore'
 model = require './model.coffee'
+ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn
 
 port = process.env.PORT || 3000
 
@@ -40,8 +42,10 @@ passport.use 'bearer', new bearer.Strategy {}, (token, done) ->
 		# create user
 		# otherwise check if user registered before (defined in model.User or not)
 		user = _.pick body.user, 'url', 'username', 'email'
-		user.token = token
-		done(err, user)
+		model.User.findOrCreate user, (err, user, created) ->
+			if err
+				return done(err, null)
+			done(err, user)
 
 passport.use 'provider', new env.oauth2.provider.Strategy env.oauth2, (token, refreshToken, profile, done) ->
 	user =
@@ -70,8 +74,12 @@ require('zappajs') port, ->
 	@get env.oauth2.cbURL, passport.authenticate('provider', scope: env.oauth2.scope), ->
 		@response.redirect @session.returnTo
 		
+	@get '/', ensureLoggedIn(path.join env.path, env.oauth2.authURL), ->
+		@render 'index.jade', {path: env.path, title: 'Device'}
+		
 	@get '/auth/logout', ->
 		@request.logout()
 		@response.redirect('/')
 	
+	@include './server/mongoose/url/user.coffee'
 	@include './server/mongoose/url/device.coffee'

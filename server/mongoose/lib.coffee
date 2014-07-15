@@ -1,3 +1,8 @@
+model = require '../../model.coffee'
+_ = require 'underscore'
+_.str = require 'underscore.string'	
+_.mixin _.str.exports()
+
 field = (name) ->
 	if name.charAt(0) == '-'
 		return name.substring(1)
@@ -15,15 +20,14 @@ order_by = (name) ->
 		
 ensurePermission = (p) ->
 	(req, res, next) ->
-		user = req.user
-		
-		if p == 'device:create' or p == 'device:list'
+		domain = p.split(':')[0]
+		if p == "#{domain}:create" or p == "#{domain}:list"
 			return next()
-			
-		model.Device.findById req.params.id, (err, device) ->
-			if err or file == null
+
+		model[_.capitalize(domain)].findById req.params.id, (err, data) ->
+			if err or data == null
 				return res.json 501, error: err
-			if file.createdBy.id == user._id.id
+			if data.createdBy.id == req.user._id.id
 				return next()
 			else res.json 401, error: 'Unauthorzied access'
 

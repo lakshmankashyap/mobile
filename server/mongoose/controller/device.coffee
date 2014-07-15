@@ -18,7 +18,7 @@ class Device
 		model.Device.findOrCreate data, (err, device, created) ->
 			if err
 				return error res, err
-			res.json device			
+			res.redirect "#{env.path}"			
 	
 	@list: (req, res) ->
 		page = if req.query.page then req.query.page else 1
@@ -47,37 +47,6 @@ class Device
 				if err
 					return error res, err
 				res.json {count: count, results: devices}
-			
-	@create: (req, res) ->
-		data = req.body
-		data.createdBy = req.user 
-		device = new model.Device data
-		device.save (err) =>
-			if err
-				return error res, err
-			res.json device			
-				
-	@read: (req, res) ->
-		id = req.param('id')
-		model.Device.findById(id).populate('createdBy updatedBy').exec (err, device) ->
-			if err or device == null
-				return error res, if err then err else "Device not found"
-			res.json device			
-			
-	@update: (req, res) ->
-		id = req.param('id')
-		model.Device.findOne {_id: id, __v: req.body.__v}, (err, device) ->
-			if err or device == null
-				return error res, if err then err else "Device not found"
-			
-			attrs = _.omit req.body, '_id', '__v', 'dateCrated', 'createdBy', 'lastUpdated', 'updatedBy'
-			_.map attrs, (value, key) ->
-				device[key] = value
-			device.updatedBy = req.user
-			device.save (err) ->
-				if err
-					error res, err
-				else res.json device				
 					
 	@delete: (req, res) ->
 		id = req.param('id')

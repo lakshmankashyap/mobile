@@ -11,7 +11,7 @@ mongoose.connect env.dbUrl, { db: { safe: true }}, (err) ->
 	
 UserSchema = new mongoose.Schema
 	url:			{ type: String, required: true, index: {unique: true} }
-	username:		{ type: String, required: true }
+	username:		{ type: String, required: true, index: {unique: true} }
 	email:			{ type: String }
 
 UserSchema.statics =
@@ -56,15 +56,20 @@ DeviceSchema = new mongoose.Schema
 	model:			{ type: String }
 	version:		{ type: String }
 	createdBy:		{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+	dateCreated:	{ type: Date }
 	
 DeviceSchema.statics =
 	search_fields: ->
-		return ['regid']
+		return ['model']
 	ordering_fields: ->
-		return ['regid']
+		return ['model']
 	ordering: ->
-		return 'regid'
+		return 'model'
 
+DeviceSchema.pre 'save', (next) ->
+	@dateCreated = new Date()
+	next()
+	
 DeviceSchema.plugin(findOrCreate)
 
 Device = mongoose.model 'Device', DeviceSchema

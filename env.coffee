@@ -21,12 +21,14 @@ env =
 		cbURL:				"/auth/provider/callback"
 		clientID:			"mobileDEVAuth"
 		clientSecret:		'password'
-		scope:		[
-			"https://#{envClient.oauth2.authServer}/org/users"
-		]
+		scope:				envClient.oauth2.scope
 	pageSize:	10
 	log4js: 	require 'log4js'
 	
+	gcm:
+		url:		'https://android.googleapis.com/gcm/send'
+		apikey:		'AIzaSyBmE7ixsvhiCEtGs9NeD3AC-CVqrEd3MnE'
+		
 env.log4js.configure
 	appenders:	[ type: 'console' ]
 	

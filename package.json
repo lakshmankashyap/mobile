@@ -23,7 +23,14 @@
     "mongoose": "^3.8.12",
     "mongoose-taggable": "^0.5.0",
     "passport-ttsoon": "https://github.com/twhtanghk/passport-ttsoon/archive/master.tar.gz",
-    "connect-ensure-login": "^0.1.1"
+    "connect-ensure-login": "^0.1.1",
+    "backbone-forms": "^0.14.0",
+    "backbone": "^1.1.2",
+    "backbone-pageable": "^1.4.8",
+    "promise": "^5.0.0",
+    "backbone.marionette": "^2.0.2",
+    "bootbox.js": "^4.0.0",
+    "underscore.string": "^2.3.3"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
