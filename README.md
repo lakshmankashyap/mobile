@@ -48,6 +48,7 @@ Configuration
 
 *   git clone https://github.com/twhtanghk/mobile.git
 *   cd mobile
+*   bower install
 *   npm install
 *	create mongo database
 *	create api key for authorization code and implicit grant in authentication server
