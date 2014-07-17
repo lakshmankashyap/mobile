@@ -8,3 +8,6 @@ ensurePermission = lib.ensurePermission
 
 	@get '/api/user', bearer, ensurePermission('user:list'), ->
 		controller.User.list(@request, @response)
+		
+	@get '/api/user/all', bearer, ensurePermission('user:list'), ->
+		controller.User.listAll(@request, @response)

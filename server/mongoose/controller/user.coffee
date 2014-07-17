@@ -9,6 +9,13 @@ error = (res, msg) ->
 
 class User
 
+	@listAll: (req, res) ->
+		order_by = lib.order_by model.User.ordering()
+		model.User.find({}).populate('createdBy updatedBy').sort(order_by).exec (err, users) ->
+			if err
+				return error res, err
+			res.json users
+		
 	@list: (req, res) ->
 		page = if req.query.page then req.query.page else 1
 		limit = if req.query.per_page then req.query.per_page else env.pageSize

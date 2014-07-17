@@ -1,9 +1,11 @@
 env = require './env.coffee'
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
+require './form.coffee'
 router = require './router.coffee'
 user = require './marionette/url/user.coffee'
 device = require './marionette/url/device.coffee'
+gcm = require './marionette/url/gcm.coffee'
 model = require './model.coffee'
 vent = require './vent.coffee'
 
@@ -32,6 +34,7 @@ class App extends Marionette.Application
 			@router = new router.Router()
 			@user = new user.Router()
 			@device = new device.Router()
+			@gcm = new gcm.Router()
 			Backbone.history.start()
 			
 		error = ->

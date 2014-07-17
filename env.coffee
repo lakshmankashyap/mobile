@@ -27,7 +27,7 @@ env =
 	
 	gcm:
 		url:		'https://android.googleapis.com/gcm/send'
-		apikey:		'AIzaSyBmE7ixsvhiCEtGs9NeD3AC-CVqrEd3MnE'
+		apikey:		'your api key'
 		
 env.log4js.configure
 	appenders:	[ type: 'console' ]

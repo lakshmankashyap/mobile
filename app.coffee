@@ -83,3 +83,4 @@ require('zappajs') port, ->
 	
 	@include './server/mongoose/url/user.coffee'
 	@include './server/mongoose/url/device.coffee'
+	@include './server/mongoose/url/gcm.coffee'

@@ -5,8 +5,8 @@ lib = require '../lib.coffee'
 View = lib.View
 ModelView = lib.ModelView
 model = require '../../model.coffee'
-User = model.User
 require 'bootstrap-multiselect'
+User = model.User
 
 class UserView extends View
 	tagName:	'li'
@@ -31,28 +31,7 @@ class UserListView extends Marionette.CompositeView
 			</ul>
 		"""
 		_.template tmpl, @collection
-	
-class UserSelectView extends Marionette.ItemView
-	template: =>
-		"""
-			<select class='multiselect' multiple='multiple'>
-			</select>
-		"""
-		
-	collectionEvents:
-		sync:	'refresh'
-		
-	onRender: =>
-		@$('select.multiselect').multiselect(includeSelectAllOption: true)
-	
-	refresh: =>
-		data = @collection.map (user) ->
-			{label: user.get('username'), value: user.id} 
-		@$('select.multiselect').multiselect 'dataprovider', data
-		
-	onBeforeDestroy: =>
-		@$('select.multiselect').multiselect 'destroy'
-		
+
 class UserSearchView extends UserListView
 	childView:	UserView
 	
@@ -99,5 +78,4 @@ class UserSearchView extends UserListView
 
 module.exports =	
 	UserListView: 	UserListView
-	UserSelectView:	UserSelectView
 	UserSearchView: UserSearchView

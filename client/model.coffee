@@ -113,10 +113,16 @@ class Devices extends PageableCollection
 	comparator:	'dateCreated'
 	
 	model:		Device
+	
+class GCMMessage extends Model
+	url: ->
+		"#{env.path}/api/gcm"
 		  
 module.exports =
 	User:			User
 	Users:			Users
+	AllUsers:		AllUsers
 	OAuth2Users:	OAuth2Users
 	Device:			Device
 	Devices:		Devices
+	GCMMessage:		GCMMessage

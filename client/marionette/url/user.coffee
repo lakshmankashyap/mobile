@@ -14,7 +14,7 @@ class Router extends Backbone.Router
 		
 	constructor: (opts = {}) ->
 		@collection = new model.Users()
-		@listView = new controller.UserSelectView {el: 'body', collection: @collection}
+		@listView = new controller.UserSearchView {el: 'body', collection: @collection}
 		super(opts)
 			
 	list: ->
