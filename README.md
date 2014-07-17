@@ -48,8 +48,9 @@ Configuration
 
 *   git clone https://github.com/twhtanghk/mobile.git
 *   cd mobile
-*   bower install
-*   npm install
+*   "bower install" to install bower package
+*   "npm install" to install npm package
+*	"npm run-script prd" to generate client script
 *	create mongo database
 *	create api key for authorization code and implicit grant in authentication server
 *	update environment variable PORT in start.sh
