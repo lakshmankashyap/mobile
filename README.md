@@ -67,11 +67,11 @@ Configuration
 ```
 
 *	update the following environment variables in env.coffee
-		1. serverUrl - the web url to deploy the web application (e.g. https://mob.myvnc.com/mobile)
-		2. dbUrl - mongo database url
-		3. clientID - client ID for oauth2 authorization code
-		4. clientSecret - client secret for oauth2 authorization code
-		5. apikey - Google GCM API key
+	1. serverUrl - the web url to deploy the web application (e.g. https://mob.myvnc.com/mobile)
+	2. dbUrl - mongo database url
+	3. clientID - client ID for oauth2 authorization code
+	4. clientSecret - client secret for oauth2 authorization code
+	5. apikey - Google GCM API key
 
 ```
 	serverUrl =	"http://localhost:3000/#{envClient.proj}"
