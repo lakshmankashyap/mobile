@@ -30,7 +30,7 @@ class UserListView extends Marionette.CompositeView
 			<ul class='list'>
 			</ul>
 		"""
-		_.template tmpl, @collection
+		_.template(tmpl)(@collection)
 
 class UserSearchView extends UserListView
 	childView:	UserView
@@ -54,7 +54,7 @@ class UserSearchView extends UserListView
 				</li>
 			</ul>
 		"""
-		_.template tmpl, @collection
+		_.template(tmpl)(@collection)
 		
 	events:
 		'input .user-search':				'search'

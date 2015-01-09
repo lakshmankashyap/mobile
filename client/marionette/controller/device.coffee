@@ -23,7 +23,7 @@ class DeviceView extends View
 				</button>
 			</td>
 		"""
-		_.template tmpl, data
+		_.template(tmpl)(data)
 
 	events:
 		'click button#delete':	'delete'
@@ -87,7 +87,7 @@ class DeviceSearchView extends Marionette.CompositeView
 				</ul>
 			</div>
 		"""
-		_.template tmpl, @collection
+		_.template(tmpl)(@collection)
 		
 	events:
 		'input .device-search':				'search'
