@@ -1,0 +1,6 @@
+{
+	"appenders": [ { "type": "mobile", "filename": "mobile.log" } ],
+	"levels": {
+		"gcm.coffee":			"DEBUG"
+	}
+}

@@ -29,7 +29,6 @@ env =
 		url:		'https://android.googleapis.com/gcm/send'
 		apikey:		'your api key'
 		
-env.log4js.configure
-	appenders:	[ type: 'console' ]
+env.log4js.configure './log4js.json', {}
 	
 module.exports = env

@@ -6,6 +6,7 @@ passport = require 'passport'
 bearer = passport.authenticate('bearer', { session: false })
 lib = require '../lib.coffee'
 ensurePermission = lib.ensurePermission
+logger = env.log4js.getLogger('app.coffee')
  
 regid = (users) ->
 	opts =
@@ -29,4 +30,7 @@ regid = (users) ->
 				registration_ids:	_.map users, (user) -> user.regid
 				data:				JSON.parse(@request.body.data)
 			http.post env.gcm.url, data, opts, (err, resp) =>
+				if err
+					logger.error err
+				logger.debug resp.body
 				@response.json resp.statusCode, resp.body
