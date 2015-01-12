@@ -13,7 +13,7 @@ class App extends Marionette.Application
 	constructor: (options) ->
 		# configure to acquire bearer token for all api call from oauth2 server
 		jso_configure 
-			oauth2:
+			mobile:
 				client_id:		env.oauth2.clientID
 				authorization:	env.oauth2.authUrl
 
@@ -26,8 +26,8 @@ class App extends Marionette.Application
 			sync method, model, opts
 				
 		Backbone.ajax = (settings) ->
-			settings.jso_provider = 'oauth2'
-			jso_ensureTokens oauth2: env.oauth2.scope
+			settings.jso_provider = 'mobile'
+			jso_ensureTokens mobile: env.oauth2.scope
 			Backbone.$.oajax(settings)
 		
 		success = =>
