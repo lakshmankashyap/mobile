@@ -6,7 +6,7 @@ passport = require 'passport'
 bearer = passport.authenticate('bearer', { session: false })
 lib = require '../lib.coffee'
 ensurePermission = lib.ensurePermission
-logger = env.log4js.getLogger('app.coffee')
+logger = env.log4js.getLogger('gcm.coffee')
  
 regid = (users) ->
 	opts =
@@ -25,6 +25,7 @@ regid = (users) ->
 		opts =
 			headers:	headers
 			json:		true
+			ca:			env.ca
 		regid(@request.body.users).then (users) =>
 			data =
 				registration_ids:	_.map users, (user) -> user.regid

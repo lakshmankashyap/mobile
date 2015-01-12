@@ -1,3 +1,10 @@
+fs = require 'fs'
+
+dir = '/etc/ssl/certs'
+files = fs.readdirSync(dir).filter (file) -> /.*\.pem/i.test(file)
+files = files.map (file) -> "#{dir}/#{file}"
+ca = files.map (file) -> fs.readFileSync file
+
 envClient = require './client/env.coffee'
 url = "https://#{envClient.oauth2.authServer}/org"
 serverUrl =	"http://localhost:3000/#{envClient.proj}"
@@ -10,6 +17,7 @@ env =
 	serverUrl:	serverUrl		# app server url
 	path:		envClient.path
 	dbUrl:		"mongodb://mobilerw:password@localhost/mobile"
+	ca:			ca
 	oauth2:
 		authorizationURL:	"#{url}/oauth2/authorize/"
 		tokenURL:			"#{url}/oauth2/token/"
