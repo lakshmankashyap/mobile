@@ -23,7 +23,7 @@ Web Server URL
 ```
 	post api/gcm - send notification to users with optional data
 		users:	array of username
-		data:	json data (e.g. {url: 'https://mob.myvnc.com/restim'})
+		data:	json data (e.g. {"url": "https://mob.myvnc.com/im", "msg": "2 messages from 通知你"})
 ```
 
 Backbone based client to interface with the above Web Server API

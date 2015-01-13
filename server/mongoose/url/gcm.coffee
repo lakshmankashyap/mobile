@@ -26,12 +26,19 @@ regid = (users) ->
 			headers:	headers
 			json:		true
 			ca:			env.ca
-		regid(@request.body.users).then (users) =>
-			data =
-				registration_ids:	_.map users, (user) -> user.regid
-				data:				JSON.parse(@request.body.data)
-			http.post env.gcm.url, data, opts, (err, resp) =>
-				if err
-					logger.error err
-				logger.debug resp.body
-				@response.json resp.statusCode, resp.body
+		reject = (err) =>
+			logger.error err
+			@response.status(500).json(error: err)
+		fulfill = (devices) =>
+			try 
+				data =
+					registration_ids:	_.map devices, (dev) -> dev.regid
+					data:				JSON.parse(@request.body.data)
+				http.post env.gcm.url, data, opts, (err, resp) =>
+					if err
+						reject(err)
+					logger.debug resp.body
+					@response.json resp.statusCode, resp.body
+			catch err
+				reject(err)
+		regid(@request.body.users).then fulfill, reject
