@@ -74,7 +74,7 @@ require('zappajs') port, ->
 	@get env.oauth2.cbURL, passport.authenticate('provider', scope: env.oauth2.scope), ->
 		@response.redirect @session.returnTo
 		
-	@get '/', ensureLoggedIn(path.join env.path, env.oauth2.authURL), ->
+	@get '/', ->
 		@render 'index.jade', {path: env.path, title: 'Device'}
 		
 	@get '/auth/logout', ->
