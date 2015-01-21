@@ -3,14 +3,16 @@ Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 require './form.coffee'
 router = require './router.coffee'
-user = require './marionette/url/user.coffee'
-device = require './marionette/url/device.coffee'
-gcm = require './marionette/url/gcm.coffee'
+userRouter = require './marionette/url/user.coffee'
+deviceRouter = require './marionette/url/device.coffee'
+gcmRouter = require './marionette/url/gcm.coffee'
 model = require './model.coffee'
 vent = require './vent.coffee'
 
 class App extends Marionette.Application
-	constructor: (options) ->
+	constructor: (opts = {}) ->
+		super(opts)
+		
 		# configure to acquire bearer token for all api call from oauth2 server
 		jso_configure 
 			mobile:
@@ -30,11 +32,12 @@ class App extends Marionette.Application
 			jso_ensureTokens mobile: env.oauth2.scope
 			Backbone.$.oajax(settings)
 		
-		success = =>
-			@router = new router.Router()
-			@user = new user.Router()
-			@device = new device.Router()
-			@gcm = new gcm.Router()
+		success = (user) =>
+			@user = user
+			new router.Router()
+			new userRouter.Router()
+			new deviceRouter.Router()
+			new gcmRouter.Router()
 			Backbone.history.start()
 			
 		error = ->

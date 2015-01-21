@@ -16,6 +16,10 @@ class Model extends Backbone.Model
 	showFields: ->
 		_.keys @schema
 		
+	constructor: (attrs = {}, opts = {}) ->
+		attrs = _.defaults attrs, selected: false
+		super(attrs, opts)
+		
 class PageableCollection extends Backbone.PageableCollection
 	pattern:	''
 	
@@ -35,13 +39,8 @@ class PageableCollection extends Backbone.PageableCollection
 	parseRecords: (res) ->
 		return res.results
 		
-	search: (name) ->
-		@pattern = name
-		@getFirstPage reset: true
-		
-	fetch: (opts = {}) ->
-		opts.data = search: @pattern
-		super(opts)
+	search: (val) ->
+		@getFirstPage reset: true, data: search: val
 		
 class User extends Model
 	urlRoot:	"#{env.path}/api/user"
@@ -101,7 +100,8 @@ class Device extends Model
 	idAttribute:	'_id'
 		
 	parse: (res, opts) ->
-		res.dateCreated = new Date(Date.parse(res.dateCreated))
+		if res.dateCreated
+			res.dateCreated = new Date(Date.parse(res.dateCreated))
 		return res
 	
 	toString: ->

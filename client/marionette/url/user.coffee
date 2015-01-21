@@ -4,22 +4,19 @@ vent = require '../../vent.coffee'
 _ = require 'underscore'
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
+lib = require '../lib.coffee'
 
 class Router extends Backbone.Router
 	routes:
 		'user/list':		'list'
-		'user/create':		'create'
-		'user/read/:id':	'read'
-		'user/update/:id':	'update'
 		
 	constructor: (opts = {}) ->
 		@collection = new model.Users()
-		@listView = new controller.UserSearchView {el: 'body', collection: @collection}
 		super(opts)
 			
 	list: ->
-		@listView.render()
-		@listView.collection.getFirstPage(reset: true)
+		lib.PageView.getInstance().show new controller.UserSearchView collection: @collection
+		@collection.getFirstPage(reset: true)
 		
 module.exports =
 	Router:		Router

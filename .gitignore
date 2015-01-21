@@ -4,3 +4,5 @@
 /.project
 /npm-debug.log
 /stdout.log
+/mobile.log
+/public/js/Tocca.js

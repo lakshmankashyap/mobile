@@ -65,6 +65,10 @@ grunt.initConfig({
 		main : {
 			src : 'public/js/index.min.js',
 			dest : 'public/js/index.js'
+		},
+		tocca : {
+			src : 'node_modules/tocca/Tocca.js',
+			dest : 'public/js/Tocca.js'
 		}
 	},
 	less : {

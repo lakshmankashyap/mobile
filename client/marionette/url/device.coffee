@@ -4,6 +4,7 @@ vent = require '../../vent.coffee'
 _ = require 'underscore'
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
+lib = require '../lib.coffee'
 
 class Router extends Backbone.Router
 	routes:
@@ -12,12 +13,11 @@ class Router extends Backbone.Router
 		
 	constructor: (opts = {}) ->
 		@collection = new model.Devices()
-		@listView = new controller.DeviceSearchView {el: 'body', collection: @collection}
 		super(opts)
 			
 	list: ->
-		@listView.render()
-		@listView.collection.getFirstPage(reset: true)
+		lib.PageView.getInstance().show new controller.DeviceSearchView collection: @collection
+		@collection.getFirstPage(reset: true)
 		
 module.exports =
 	Router:		Router

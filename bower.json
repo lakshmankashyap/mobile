@@ -13,6 +13,7 @@
   "dependencies": {
     "bootstrap": "~3.2.0",
     "jquery": "~2.1.1",
-    "bootstrap-multiselect": "~0.9.6"
+    "bootstrap-multiselect": "~0.9.6",
+    "bootstrap.growl": "~2.0.1"
   }
 }

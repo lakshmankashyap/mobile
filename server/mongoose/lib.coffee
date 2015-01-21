@@ -27,7 +27,7 @@ ensurePermission = (p) ->
 		model[_.capitalize(domain)].findById req.params.id, (err, data) ->
 			if err or data == null
 				return res.json 501, error: err
-			if data.createdBy.id == req.user._id.id
+			if data.createdBy?.id == req.user._id.id
 				return next()
 			else res.json 401, error: 'Unauthorzied access'
 
