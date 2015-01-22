@@ -9,6 +9,7 @@ env =
 	oauth2:
 		clientID:		"mobileDEV"
 		authServer:		authServer
+		verifyUrl:		"https://#{authServer}/org/oauth2/verify/"
 		authUrl:		"https://#{authServer}/org/oauth2/authorize/"
 		scope:			[
 			"https://#{authServer}/org/users",

@@ -15,7 +15,7 @@ class Router extends Backbone.Router
 		super(opts)
 			
 	list: ->
-		lib.PageView.getInstance().show new controller.UserSearchView collection: @collection
+		window.app.page.show new controller.UserSearchView collection: @collection
 		@collection.getFirstPage(reset: true)
 		
 module.exports =

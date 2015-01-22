@@ -18,10 +18,6 @@ body {
 			.device, .user {
 				.row;
 				
-				.model {
-					width: 200px;
-				}
-				
 				span {
 					display: inline-block;
 					white-space: nowrap;
@@ -31,27 +27,26 @@ body {
 			}
 			
 			.device {
+				.model {
+					.make-xs-column(6);
+				}
+				
 				.version {
-					width: 160px;
+					.make-xs-column(3);
 				}
 				
 				.dateCreated {
-					width: 100px;
-				}
-				
-				.action {
-					width: 80px;
-					float: right;
+					.make-xs-column(3);
 				}
 			}
 			
 			.user {
 				.name {
-					width: 160px;
+					.make-xs-column(4);
 				}
 				
 				.email {
-					width: 200px;
+					.make-xs-column(8);
 				}
 			}
 		}

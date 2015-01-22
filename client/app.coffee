@@ -8,6 +8,7 @@ deviceRouter = require './marionette/url/device.coffee'
 gcmRouter = require './marionette/url/gcm.coffee'
 model = require './model.coffee'
 vent = require './vent.coffee'
+lib = require './marionette/lib.coffee'
 
 class App extends Marionette.Application
 	constructor: (opts = {}) ->
@@ -42,6 +43,8 @@ class App extends Marionette.Application
 			
 		error = ->
 			alert 'Unauthorized access'
+		
+		@page = new lib.PageView()
 		
 		model.OAuth2Users.me().then success, error
 		

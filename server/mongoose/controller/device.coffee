@@ -9,16 +9,13 @@ error = (res, msg) ->
 
 class Device
 
-	@register: (req, res) ->
-		data = 
-			regid:		req.params.regid
-			model: 		req.params.model
-			version:	req.params.version
+	@create: (req, res) ->
+		data = _.pick req.body, 'regid', 'model', 'version' 
 		data.createdBy = req.user 
 		model.Device.findOrCreate data, (err, device, created) ->
 			if err
 				return error res, err
-			res.redirect "#{env.path}"			
+			res.json device			
 	
 	@list: (req, res) ->
 		page = if req.query.page then req.query.page else 1

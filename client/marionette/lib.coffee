@@ -123,44 +123,8 @@ navbar = (opts = {}) ->
 	opts = _.defaults opts, 'class': 'navbar navbar-default', 'html': html 
 	opts = _.pick opts, 'html', 'class'
 	$('<nav>', opts)[0].outerHTML
-			
-class ModalView extends Marionette.ItemView
-	id:			'modal'
-	
-	className:	'modal'
-	
-	template: (data) =>
-		tmpl = """
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title"></h4>
-		      </div>
-		      <div class="modal-body">
-		      </div>
-		    </div>
-		  </div>
-		"""
-		_.template(tmpl)(data)
 		
-	constructor: (opts = {}) ->
-		super(opts)
-		vent.on 'show:modal', (msg) =>
-			@$el.html @template(msg)
-			@$el.find('.modal-title').append(msg.header)
-			@$el.find('.modal-body').append(msg.body)
-			@$el.modal('show')
-		vent.on 'hide:modal', =>
-			@$el.modal('hide')
-		
-	@getInstance: ->
-		@_instance ?= new ModalView()
-		
-	destroy: ->
-		return
-		
-class CmdView extends Marionette.LayoutView
+class ModalView extends Marionette.LayoutView
 	className:	'modal fade'
 	
 	attributes:
@@ -184,25 +148,32 @@ class CmdView extends Marionette.LayoutView
 		'modal-body':	'.modal-body'
 		
 	onRender: ->
-		if @view
-			@getRegion('modal-body').show(@view)
+		if @data?.title
+			@$('.modal-title').html(@data.title)
+		if @data?.body
+			@getRegion('modal-body').show(@data.body)
 		
 	# opts.view: view to be inserted into dialog body
 	constructor: (opts = {}) ->
 		super(opts)
-		@view = opts.view
-		vent.on 'show:cmd', (view) =>
-			@view = view
-			@render()
-			@$el.modal('show')
-		vent.on 'hide:cmd', =>
-			@$el.modal('hide')
+		vent.on 'show:cmd', @show
+		vent.on 'hide:cmd', @hide
 		
-	@getInstance: ->
-		@_instance ?= new CmdView()
-	
 	destroy: ->
-		return
+		super()
+		vent.off 'show:cmd', @show
+		vent.off 'hide:cmd', @hide
+		
+	# data:
+	#	title:	string put on the modal title
+	#	body:	view to be rendered on the modal body
+	show: (data) =>
+		@data = data
+		@render()
+		@$el.modal('show')
+		
+	hide: =>
+		@$el.modal('hide')
 	
 class PageView extends Marionette.LayoutView
 	el:	'body'
@@ -234,16 +205,11 @@ class PageView extends Marionette.LayoutView
 		
 	regions:
 		popup:		'#popup'
-		cmd:		'#cmd'
 		content:	'#content'
 
 	onRender: ->
-		@getRegion('popup').show(ModalView.getInstance())
-		@getRegion('cmd').show(CmdView.getInstance())
+		@getRegion('popup').show new ModalView()
 			
-	@getInstance: ->
-		@_instance ?= new PageView()
-	
 	search: (event) ->
 		vent.trigger 'search', $(event.target).val()
 		
@@ -322,5 +288,4 @@ module.exports =
 		navbar:		navbar
 	ModelView:	ModelView
 	ModalView:	ModalView
-	CmdView:	CmdView
 	PageView:	PageView

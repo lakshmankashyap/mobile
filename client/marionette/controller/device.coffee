@@ -17,13 +17,7 @@ class Action extends Marionette.ItemView
 		
 	'delete': ->
 		vent.trigger 'device:delete hide:cmd'
-			
-	@getInstance: ->
-		@_instance ?= new Action()
-	
-	destroy: ->
-		return
-		
+				
 class DeviceView extends Marionette.ItemView
 	tagName:	'div'
 	
@@ -58,7 +52,7 @@ class DeviceView extends Marionette.ItemView
 		@model.set 'selected', not @model.get('selected')
 		
 	menu: (event) ->
-		vent.trigger 'show:cmd', Action.getInstance()
+		vent.trigger 'show:cmd', title: 'Device', body: new Action()
 		
 	del: ->
 		@model.destroy(wait: true)

@@ -13,9 +13,11 @@ Web Server URL
 *   Device
 
 ```
-    get device/:regid/:model/:version - register mobile device of the input registration ID, model, and version for the authenticated user
-    get device - list all devices for the authenticated user
     get api/device - return devices list for the input oauth2 token in json
+    post api/device - create device with registration id, model, version for the authenticated user
+    	regid:		registration id
+    	model:		model of the mobile device
+    	version:	OS version of the mobile device
     del	api/device/:id - delete the device with the input id 
 ```
 
@@ -36,6 +38,8 @@ Backbone based client to interface with the above Web Server API
 *	Device
 ```
 	#device/list - list all devices for the authenticated user
+	#device/create/:regid/:model/:version - register mobile device with the input registration id, model, version for the authenticated user
+	#device/delete/:id - delete the device with specified id
 ```
 
 *	GCM

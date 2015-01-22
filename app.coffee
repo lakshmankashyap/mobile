@@ -29,7 +29,7 @@ passport.use 'bearer', new bearer.Strategy {}, (token, done) ->
 		ca:		ca
 		headers:
 			Authorization:	"Bearer #{token}"
-	http.get env.oauth2.verifyURL, opts, (err, res, body) ->
+	http.get envClient.oauth2.verifyUrl, opts, (err, res, body) ->
 		if err?
 			return logger.error err
 				
@@ -47,16 +47,6 @@ passport.use 'bearer', new bearer.Strategy {}, (token, done) ->
 				return done(err, null)
 			done(err, user)
 
-passport.use 'provider', new env.oauth2.provider.Strategy env.oauth2, (token, refreshToken, profile, done) ->
-	user =
-		url:		profile.id
-		username:	profile.displayName
-		email:		profile.emails[0].value
-	model.User.findOrCreate user, (err, user, created) ->
-		if err
-			return done(err, null)
-		done(err, user)
-
 require('zappajs') port, ->
 	@set 'view engine': 'jade'
 	# strip url with prefix = env.path 
@@ -69,11 +59,6 @@ require('zappajs') port, ->
 	@use passport.initialize(), passport.session()
 	@use 'zappa'
 
-	@get env.oauth2.authURL, passport.authenticate('provider', scope: env.oauth2.scope)
-	
-	@get env.oauth2.cbURL, passport.authenticate('provider', scope: env.oauth2.scope), ->
-		@response.redirect @session.returnTo
-		
 	@get '/', ->
 		@render 'index.jade', {path: env.path, title: 'Device'}
 		
