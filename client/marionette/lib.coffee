@@ -114,6 +114,7 @@ navbar = (opts = {}) ->
   				<ul class="nav navbar-nav navbar-left">
   					#{ opts.left.join('') }
   				</ul>
+  				#{ opts.other.join('') }
   				<ul class="nav navbar-nav navbar-right">
   					#{ opts.right.join('') }
   				</ul>
@@ -192,16 +193,20 @@ class PageView extends Marionette.LayoutView
 						link
 							href: '#user/list'
 							html: 'User'
-				search
-					class: 'navbar-form navbar-left'
 			]
 			right:	[
 				curruser()
 			]
+			other: [
+				search
+					class: 'navbar-form navbar-left'
+			]
 		navbar(opts) + "<div id='popup'></div><div id='cmd'></div><div id='content'></div>"
 		
 	events:
-		'input #search':	'search'
+		'click a[href]':			'hide'
+		'click .glyphicon-search':	'hide'
+		'input #search':			'search'
 		
 	regions:
 		popup:		'#popup'
@@ -218,6 +223,11 @@ class PageView extends Marionette.LayoutView
 			@render()
 		@getRegion('content').show view
 		@$('#search input').val('')
+		
+	# hide navbar if navbar-toggle is displayed in small screen factor
+	hide: ->
+		if $('.navbar-toggle').css('display') != 'none'
+			$('.navbar-collapse').toggleClass('in', false)
 		
 class ModelView extends Marionette.ItemView
 	template: (data) =>

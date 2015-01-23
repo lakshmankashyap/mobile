@@ -28,7 +28,7 @@ class DeviceView extends Marionette.ItemView
 		tmpl = """
 			<span class='model'><%= obj.model %></span>
 			<span class='version'><%= obj.version %></span>
-			<span class='dateCreated'><%= obj.dateCreated %></span>
+			<span class='dateCreated'><%= obj.dateCreated.toLocaleString() %></span>
 		"""
 		_.template(tmpl)(data)
 
