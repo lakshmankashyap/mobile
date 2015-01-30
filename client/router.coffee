@@ -11,7 +11,7 @@ class Router extends Backbone.Router
 		@navigate 'device/list', trigger: true
 			
 	logout: ->
-		jso_wipe()
+		window.app.jso.wipeTokens()
 		vent.info 'successfully logout'
 		window.location.href = env.path
 		

@@ -54,12 +54,15 @@ class DeviceView extends Marionette.ItemView
 	menu: (event) ->
 		vent.trigger 'show:cmd', title: 'Device', body: new Action()
 		
-	del: ->
-		@model.destroy(wait: true)
-	
+	del: =>
+		@$el.addClass 'selected'
+		@$el.css position: 'relative'
+		@$el.animate left: '120%', 'slow', => 
+			@model.destroy(wait: true)
+		
 	delSelected: =>
 		if @model.get('selected')
-			@model.destroy wait: true
+			@del()
 
 class DeviceSearchView extends Marionette.CompositeView
 	childView:	DeviceView

@@ -6,15 +6,17 @@ env =
 	user:
 		url:	"https://#{authServer}/org/api/users/"
 	path:		"/#{proj}"
-	oauth2:
-		clientID:		"mobileDEV"
+	oauth:
 		authServer:		authServer
 		verifyUrl:		"https://#{authServer}/org/oauth2/verify/"
-		authUrl:		"https://#{authServer}/org/oauth2/authorize/"
-		scope:			[
-			"https://#{authServer}/org/users",
-			"https://#{authServer}/mobile/device"
-		]
+		provider_id:	"mobile"
+		client_id:		"mobileDEV"
+		authorization:	"https://#{authServer}/org/oauth2/authorize/"
+		scopes:
+			request:	[
+				"https://#{authServer}/org/users",
+				"https://#{authServer}/mobile/device"
+			]
 	flash:
 		timeout:	5000		# ms	
 			

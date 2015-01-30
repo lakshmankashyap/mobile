@@ -45,10 +45,6 @@ UserSchema.methods =
 UserSchema.plugin(findOrCreate)
 UserSchema.plugin(taggable)
 
-UserSchema.pre 'save', (next) ->
-	@addTag(env.role.all)
-	@increment()
-	next()
 User = mongoose.model 'User', UserSchema
 	
 DeviceSchema = new mongoose.Schema

@@ -26,7 +26,6 @@
     "needle": "^0.7.2",
     "passport": "^0.2.0",
     "passport-http-bearer": "^1.0.1",
-    "passport-ttsoon": "https://github.com/twhtanghk/passport-ttsoon/archive/master.tar.gz",
     "promise": "^5.0.0",
     "tocca": "^0.1.0",
     "underscore": "^1.6.0",

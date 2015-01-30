@@ -69,6 +69,10 @@ grunt.initConfig({
 		tocca : {
 			src : 'node_modules/tocca/Tocca.js',
 			dest : 'public/js/Tocca.js'
+		},
+		jso: {
+			src : 'bower_components/jso/build/jso.js',
+			dest : 'public/js/jso.js'
 		}
 	},
 	less : {

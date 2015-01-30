@@ -29,14 +29,14 @@ passport.use 'bearer', new bearer.Strategy {}, (token, done) ->
 		ca:		ca
 		headers:
 			Authorization:	"Bearer #{token}"
-	http.get envClient.oauth2.verifyUrl, opts, (err, res, body) ->
+	http.get envClient.oauth.verifyUrl, opts, (err, res, body) ->
 		if err?
 			return logger.error err
 				
 		# check required scope authorized or not
 		scope = body.scope.split(' ')
-		result = _.intersection scope, envClient.oauth2.scope
-		if result.length != envClient.oauth2.scope.length
+		result = _.intersection scope, envClient.oauth.scopes.request
+		if result.length != envClient.oauth.scopes.request.length
 			return done('Unauthorzied access', null)
 			
 		# create user

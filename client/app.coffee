@@ -15,11 +15,10 @@ class App extends Marionette.Application
 		super(opts)
 		
 		# configure to acquire bearer token for all api call from oauth2 server
-		jso_configure 
-			mobile:
-				client_id:		env.oauth2.clientID
-				authorization:	env.oauth2.authUrl
-
+		JSO.enablejQuery(Backbone.$)
+		@jso = new JSO env.oauth
+		@jso.callback()
+		
 		sync = Backbone.sync
 		Backbone.sync = (method, model, opts) ->
 			error = opts.error
@@ -28,10 +27,9 @@ class App extends Marionette.Application
 				vent.trigger 'show:msg', resp.responseJSON.error, 'error'
 			sync method, model, opts
 				
-		Backbone.ajax = (settings) ->
-			settings.jso_provider = 'mobile'
-			jso_ensureTokens mobile: env.oauth2.scope
-			Backbone.$.oajax(settings)
+		Backbone.ajax = (settings) =>
+			settings = _.defaults settings, oauth: env.oauth
+			@jso.ajax(settings)
 		
 		success = (user) =>
 			@user = user
