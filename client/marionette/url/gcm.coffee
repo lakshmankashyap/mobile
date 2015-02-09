@@ -6,12 +6,8 @@ class Router extends Backbone.Router
 	routes:
 		'gcm':		'gcm'
 		
-	constructor: (opts = {}) ->
-		@gcmView = new controller.GCMView {el: 'body'}
-		super(opts)
-			
 	gcm: ->
-		@gcmView.render()
+		window.app.page.show new controller.GCMView()
 		
 module.exports =
 	Router:		Router
