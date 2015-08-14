@@ -1,20 +1,7 @@
 {
-  "name": "mobile",
-  "version": "0.0.0",
-  "homepage": "https://github.com/twhtanghk/mobile",
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "bootstrap": "~3.2.0",
-    "jquery": "~2.1.1",
-    "bootstrap-multiselect": "~0.9.6",
-    "bootstrap.growl": "~2.0.1",
-    "jso": "~2.0.0"
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.1"
   }
 }

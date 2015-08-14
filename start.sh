@@ -1,7 +1,6 @@
 #!/bin/sh
 
 root=~/prod/mobile
+sails=`which sails`
 
-cd ${root}
-export PORT=8005
-/usr/bin/npm start >>${root}/stdout.log 2>&1
+forever start --workingDir ${root} -a -l mobile.log ${sails} lift --prod

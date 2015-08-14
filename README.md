@@ -21,31 +21,13 @@ Web Server URL
     del	api/device/:id - delete the device with the input id 
 ```
 
-*	GCM
+*	Push
 ```
-	post api/gcm - send notification to users with optional data
-		users:	array of username
+	post api/push - send notification to users with optional data
+		users:	array of user email addresses
 		data:	json data (e.g. {"url": "https://mob.myvnc.com/im", "msg": "2 messages from 通知你"})
 ```
 
-Backbone based client to interface with the above Web Server API
-----------------------------------------------------------------
-*	User
-```
-	#user/list - list all users of mobile Web App
-```
-
-*	Device
-```
-	#device/list - list all devices for the authenticated user
-	#device/create/:regid/:model/:version - register mobile device with the input registration id, model, version for the authenticated user
-	#device/delete/:id - delete the device with specified id
-```
-
-*	GCM
-```
-	#gcm - send data to specified users
-```
 
 Configuration
 =============
@@ -77,10 +59,4 @@ Configuration
 	2. dbUrl - mongo database url
 	3. apikey - Google GCM API key
 
-```
-	serverUrl =	"http://localhost:3000/#{envClient.proj}"
-	env =
-		dbUrl:			"mongodb://mobilerw:password@localhost/mobile"
-		gcm:
-			apikey:		'your api key'
-```
+a [Sails](http://sailsjs.org) application
