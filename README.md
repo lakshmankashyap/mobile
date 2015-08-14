@@ -34,29 +34,22 @@ Configuration
 
 *   git clone https://github.com/twhtanghk/mobile.git
 *   cd mobile
-*   "bower install" to install bower package
 *   "npm install" to install npm package
-*	"npm run-script prd" to generate client script
 *	create mongo database
 *	create api key for authorization code and implicit grant in authentication server
-*	update environment variable PORT in start.sh
+*	update environment variable 'port', 'verifyURL', 'apikey', database connection in config/env/prodcution.coffee
     
 ```
-    export PORT=8005
+    port: 8000
+    ...
+    ...
+    oauth2:
+		verifyURL:			"https://mob.myvnc.com/org/oauth2/verify/"
+	...
+	...
+	push:
+		gcm:
+			url:		'https://android.googleapis.com/gcm/send'
+			senderid:	'Google Sender ID'
+			apikey:		'Google GCM API key'
 ```
-
-*   update environment variable proj, authServer, clientID for oauth2 Implicit Grant in client/env.cofffee
-
-```
-    proj = 'mobile'
-	authServer = 'mob.myvnc.com'
-	env =
-		clientID:		"mobile"
-```
-
-*	update the following environment variables in env.coffee
-	1. serverUrl - the web url to deploy the web application (e.g. https://mob.myvnc.com/mobile)
-	2. dbUrl - mongo database url
-	3. apikey - Google GCM API key
-
-a [Sails](http://sailsjs.org) application

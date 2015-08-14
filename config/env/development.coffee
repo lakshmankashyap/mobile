@@ -32,5 +32,5 @@ module.exports =
 	push:
 		gcm:
 			url:		'https://android.googleapis.com/gcm/send'
-			senderid:	'ninth-airship-624'
-			apikey:		'AIzaSyBmE7ixsvhiCEtGs9NeD3AC-CVqrEd3MnE'
+			senderid:	'Google Sender ID'
+			apikey:		'Google GCM API key'
