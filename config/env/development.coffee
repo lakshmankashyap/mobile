@@ -7,7 +7,7 @@ module.exports =
 		timeout:	10000 # ms
 	oauth2:
 		verifyURL:			"https://mob.myvnc.com/org/oauth2/verify/"
-		scope:				[ "https://mob.myvnc.com/org/users", "https://mob.myvnc.com/mobile/device" ]
+		scope:				[ "https://mob.myvnc.com/org/users", "https://mob.myvnc.com/mobile" ]
 	models:
 		connection: 'mongo'
 		migrate:	'alter'
@@ -32,5 +32,4 @@ module.exports =
 	push:
 		gcm:
 			url:		'https://android.googleapis.com/gcm/send'
-			senderid:	'Google Sender ID'
 			apikey:		'Google GCM API key'

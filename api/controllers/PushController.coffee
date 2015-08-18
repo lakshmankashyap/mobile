@@ -10,13 +10,12 @@ module.exports =
 	# data:		message data to be sent
 	create: (req, res) ->
 		values = actionUtil.parseValues(req)
-		from = req.user
 		sails.models.user
 			.find()
 			.where(email: values.users)
 			.populateAll()
 			.then (to) ->
-				sails.services.push
-					.send to, values.data
+				sails.services.rest
+					.gcmPush to, values.data
 					.then res.ok, res.serverError
 			.catch res.serverError

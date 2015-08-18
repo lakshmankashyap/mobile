@@ -49,7 +49,5 @@ Configuration
 	...
 	push:
 		gcm:
-			url:		'https://android.googleapis.com/gcm/send'
-			senderid:	'Google Sender ID'
 			apikey:		'Google GCM API key'
 ```

@@ -1,43 +1,29 @@
-# check if oauth2 bearer is available
-fs = require 'fs'
-http = require 'needle'
 passport = require 'passport'
 bearer = require 'passport-http-bearer'
 Promise = require 'promise'
 
-dir = '/etc/ssl/certs'
-files = fs.readdirSync(dir).filter (file) -> /.*\.pem/i.test(file)
-files = files.map (file) -> "#{dir}/#{file}"
-ca = files.map (file) -> fs.readFileSync file
-
+# check if oauth2 bearer is available
 verifyToken = (token) ->
-	opts = 
-		timeout:	sails.config.promise.timeout
-		ca:			ca
-		headers:
-			Authorization:	"Bearer #{token}"
-	
 	oauth2 = sails.config.oauth2
 	
 	return new Promise (fulfill, reject) ->
-		http.get oauth2.verifyURL, opts, (err, res, body) ->
-			if err or res.statusCode != 200
-				return reject('Unauthorized access')
+		sails.services.rest.get token, oauth2.verifyURL
+			.then (res) -> 
+				# check required scope authorized or not
+				scope = res.body.scope.split(' ')
+				result = _.intersection scope, oauth2.scope
+				if result.length != oauth2.scope.length
+					return reject('Unauthorized access to #{oauth2.scope}')
 					
-			# check required scope authorized or not
-			scope = body.scope.split(' ')
-			result = _.intersection scope, oauth2.scope
-			if result.length != oauth2.scope.length
-				return reject('Unauthorized access to #{oauth2.scope}')
-				
-			# create user
-			# otherwise check if user registered before (defined in model.User or not)
-			user = _.pick body.user, 'url', 'username', 'email'
-			sails.models.user
-				.findOrCreate user
-				.populateAll()
-				.then fulfill, reject
-
+				# create user
+				# otherwise check if user registered before (defined in model.User or not)
+				user = _.pick res.body.user, 'url', 'username', 'email'
+				sails.models.user
+					.findOrCreate user
+					.populateAll()
+					.then fulfill, reject
+			.catch reject
+			
 passport.use 'bearer', new bearer.Strategy {}, (token, done) ->
 	fulfill = (user) ->
 		user.token = token
