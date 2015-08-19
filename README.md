@@ -25,7 +25,7 @@ Web Server URL
 ```
 	post api/push - send notification to users with optional data
 		users:	array of user email addresses
-		data:	json data (e.g. {"url": "https://mob.myvnc.com/im", title: "Instant Messaging", "message": "2 messages from 通知你"}) where default message is "required field" if not defined
+		data:	json data (e.g. {"url": "https://mob.myvnc.com/im", title: "Instant Messaging", "message": "2 messages from 通知你"}) where default title message are "Instant Messaging" and " " if not defined
 ```
 
 Configuration
@@ -35,7 +35,7 @@ Configuration
 *   cd mobile
 *   "npm install" to install npm package
 *	create mongo database
-*	create api key for authorization code and implicit grant in authentication server
+*	create GCM api key and implicit grant in authentication server
 *	update environment variable 'port', 'verifyURL', 'apikey', database connection in config/env/prodcution.coffee
     
 ```
