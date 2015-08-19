@@ -7,9 +7,7 @@ module.exports =
 	
 	autoWatch:			false
 	
-	autoSubscribe:		false
-	
-	autoSubscribeDeep:	false
+	autosubscribe:		false
 	
 	tableName:			'user'
 	
