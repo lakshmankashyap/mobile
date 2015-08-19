@@ -33,7 +33,7 @@ module.exports =
 					
 	push: (token, roster, msg) ->
 		data =
-			url: _.template "http://localhost:3000/im.app/#/chat/<%=msg.type%>/<%=roster.createdBy.id%>",
+			url: _.template "/chat/<%=msg.type%>/<%=msg.createdBy%>",
 				roster: roster
 				msg:	msg 
 			msg: _.template "<%=roster.newmsg%> message from <%=roster.createdBy.email%>}",
@@ -54,6 +54,7 @@ module.exports =
 			_.each users, (user) ->
 				_.each user.devices, (device) ->
 					devices.push device.regid 
+			data.message ?= 'required field'
 			data =
 				registration_ids:	_.uniq(devices)
 				data:				data

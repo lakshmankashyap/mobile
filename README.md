@@ -25,9 +25,8 @@ Web Server URL
 ```
 	post api/push - send notification to users with optional data
 		users:	array of user email addresses
-		data:	json data (e.g. {"url": "https://mob.myvnc.com/im", "msg": "2 messages from 通知你"})
+		data:	json data (e.g. {"url": "https://mob.myvnc.com/im", title: "Instant Messaging", "message": "2 messages from 通知你"}) where default message is "required field" if not defined
 ```
-
 
 Configuration
 =============
