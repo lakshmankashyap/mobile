@@ -57,10 +57,10 @@ module.exports =
 			defaultMsg =
 				title:		'Instant Messaging'
 				message:	' '
-			data =
+			notification =
 				registration_ids:	_.uniq(devices)
-				data:				_.extend defaultMsg, data
-			http.post sails.config.push.gcm.url, data, opts, (err, res) =>
+				data:				_.extend defaultMsg, _.pick(data, 'title', 'message'), data: _.omit(data, 'title', 'message')
+			http.post sails.config.push.gcm.url, notification, opts, (err, res) =>
 				if err
 					return reject(err)
 				fulfill(res.body)
