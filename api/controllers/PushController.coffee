@@ -10,9 +10,6 @@ module.exports =
 	# data:		message data to be sent
 	create: (req, res) ->
 		values = actionUtil.parseValues(req)
-		fulfill = (body) ->
-			sails.log.info body
-			res.ok body
 		reject = (err) ->
 			sails.log.error err
 			res.serverError err
@@ -21,6 +18,9 @@ module.exports =
 			.where(email: values.users)
 			.populateAll()
 			.then (to) ->
+				fulfill = (body) ->
+					sails.log.info "#{_.pluck(to, 'email')}: #{JSON.stringify body}"
+					res.ok body
 				sails.services.rest
 					.gcmPush to, values.data
 					.then fulfill
