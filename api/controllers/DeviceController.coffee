@@ -10,7 +10,7 @@ module.exports =
 		data = actionUtil.parseValues(req)
 		data.createdBy = data.createdBy.id
 		
-		Model.findOrCreate(_.pick(data, 'model', 'version', 'createdBy'), data)
+		Model.updateOrCreate(_.pick(data, 'model', 'version', 'createdBy'), data)
 			.then (newInstance) ->
 				if req._sails.hooks.pubsub and req.isSocket
 					if Model.autoSubscribe
