@@ -1,4 +1,4 @@
- # GroupController
+ # PushController
  #
  # @description :: Server-side logic for managing groups
  # @help        :: See http://links.sailsjs.org/docs/controllers
@@ -10,6 +10,12 @@ module.exports =
 	# data:		message data to be sent
 	create: (req, res) ->
 		values = actionUtil.parseValues(req)
+		fulfill = (body) ->
+			sails.log.info body
+			res.ok body
+		reject = (err) ->
+			sails.log.error err
+			res.serverError err
 		sails.models.user
 			.find()
 			.where(email: values.users)
@@ -17,5 +23,5 @@ module.exports =
 			.then (to) ->
 				sails.services.rest
 					.gcmPush to, values.data
-					.then res.ok, res.serverError
-			.catch res.serverError
+					.then fulfill
+			.catch reject

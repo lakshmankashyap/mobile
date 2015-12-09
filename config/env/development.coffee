@@ -1,7 +1,6 @@
-path = '/mobile'
+agent = require 'https-proxy-agent'
 
 module.exports =
-	path:			path
 	port:			3001
 	promise:
 		timeout:	10000 # ms
@@ -33,3 +32,6 @@ module.exports =
 		gcm:
 			url:		'https://android.googleapis.com/gcm/send'
 			apikey:		'Google GCM API key'
+	http:
+		opts:
+			agent:	new agent('http://proxy1.scig.gov.hk:8080')
