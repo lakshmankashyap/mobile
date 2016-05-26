@@ -1,5 +1,3 @@
-agent = require 'https-proxy-agent'
-
 module.exports =
 	promise:
 		timeout:	10000 # ms
@@ -13,7 +11,7 @@ module.exports =
 		mongo:
 			adapter:	'sails-mongo'
 			driver:		'mongodb'
-			url:		'mongodb://root@mongo/im'
+			url:		'mongodb://mongo/im'
 	log:
 		level:		'silly'
 	push:
