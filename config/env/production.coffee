@@ -13,7 +13,7 @@ module.exports =
 			driver:		'mongodb'
 			url:		'mongodb://mongo/im'
 	log:
-		level:		'silly'
+		level:		'info'
 	push:
 		gcm:
 			url:		'https://android.googleapis.com/gcm/send'

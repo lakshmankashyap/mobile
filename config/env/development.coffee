@@ -1,5 +1,3 @@
-agent = require 'https-proxy-agent'
-
 module.exports =
 	promise:
 		timeout:	10000 # ms
