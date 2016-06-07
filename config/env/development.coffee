@@ -11,7 +11,7 @@ module.exports =
 		mongo:
 			adapter:	'sails-mongo'
 			driver:		'mongodb'
-			url:		'mongodb://root@mongo/im'
+			url:		'mongodb://mobile_mongo/mobile'
 	log:
 		level:		'silly'
 	push:
