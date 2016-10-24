@@ -31,22 +31,5 @@ Web Server URL
 Configuration
 =============
 
-*   git clone https://github.com/twhtanghk/mobile.git
-*   cd mobile
-*   "npm install" to install npm package
-*	create mongo database
-*	create GCM api key and implicit grant in authentication server
-*	update environment variable 'port', 'verifyURL', 'apikey', database connection in config/env/prodcution.coffee
-    
-```
-    port: 8000
-    ...
-    ...
-    oauth2:
-		verifyURL:			"https://mob.myvnc.com/org/oauth2/verify/"
-	...
-	...
-	push:
-		gcm:
-			apikey:		'Google GCM API key'
-```
+* docker run -v ${COMPOSEROOT}/data:/data/db -d mongo
+* docker run -d twhtanghk/mobile or docker-compose -f docker-compose.yml up 
