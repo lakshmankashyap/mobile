@@ -31,5 +31,6 @@ Web Server URL
 Configuration
 =============
 
+* update environment variables defined in .env
 * docker run -v ${COMPOSEROOT}/data:/data/db -d mongo
 * docker run -d twhtanghk/mobile or docker-compose -f docker-compose.yml up 
