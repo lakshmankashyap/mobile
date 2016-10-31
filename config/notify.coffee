@@ -28,4 +28,4 @@ module.exports =
       smtp.sendMailAsync
         to: email
         subject: data.title
-        html: "<a href='#{data.url}'>data.message</a>"
+        html: "<a href='#{data.url}'>#{data.message}</a>"
