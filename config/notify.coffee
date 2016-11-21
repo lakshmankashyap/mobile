@@ -12,14 +12,17 @@ smtp = Promise.promisifyAll nodemailer.createTransport process.env.SMTPURL
 module.exports =
   notify:
     gcm: (device, data) ->
-      msg = new gcm.Message()
-      msg.addNotification
-        title: data.title
-        body: data.message || ' '
-        sound: 'default'
+      msg = new gcm.Message 
+        collapseKey: data.title
+        notification:
+          tag: data.title
+          title: data.title
+          body: data.message || ' '
+          sound: 'default'
       gcmProvider.sendAsync msg, registrationTokens: [device]
     apn: (device, data) ->
       msg = new apn.Notification
+        collapseId: data.title
         title: data.title
         body: data.message
         sound: 'default'
