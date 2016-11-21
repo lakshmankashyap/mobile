@@ -14,9 +14,4 @@ module.exports =
 			.then (to) ->
 				Promise.all _.map to, (user) ->
 					user.notify values.data
-			.then (body) ->
-				sails.log.info JSON.stringify body
-				res.ok body
-			.catch (err) ->
-				sails.log.error err
-				res.serverError err
+			.then res.ok, res.serverError

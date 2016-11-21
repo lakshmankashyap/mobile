@@ -5,7 +5,7 @@ apn = require 'apn'
 apnProvider = new apn.Provider
   pfx: process.env.APNPFX
   passphrase: process.env.APNPASS
-  production: false
+  production: (process.env.APNRPOD? and process.env.APNRPOD == 'true') or false
 nodemailer = require 'nodemailer'
 smtp = Promise.promisifyAll nodemailer.createTransport process.env.SMTPURL
 

@@ -1,5 +1,6 @@
 _ = require 'lodash'
 Promise = require 'bluebird'
+util = require 'util'
 
 apn = require 'apn'
 
@@ -41,9 +42,15 @@ module.exports =
     notify: (data) ->
       switch true
         when @type() == 'ios'
-          sails.config.notify.apn @regid, data
+          sails.config.notify
+            .apn @regid, data
+            .then (res) =>
+              sails.log.info "#{@model} #{@regid} #{util.inspect res}"
         when @type() == 'android'
-          sails.config.notify.gcm @regid, data
+          sails.config.notify
+            .gcm @regid, data
+            .then (res) =>
+              sails.log.info "#{@model} #{@regid} #{util.inspect res}"
         
   updateOrCreate:  (criteria, data) ->
     new Promise (fulfill, reject) =>
