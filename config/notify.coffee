@@ -14,7 +14,7 @@ module.exports =
     gcm: (device, data) ->
       msg = new gcm.Message()
       msg.addNotification
-        title: 'Instant Messaging'
+        title: data.title
         body: data.message || ' '
         sound: 'default'
       gcmProvider.sendAsync msg, registrationTokens: [device]
