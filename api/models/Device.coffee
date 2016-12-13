@@ -1,18 +1,10 @@
 _ = require 'lodash'
 Promise = require 'bluebird'
 util = require 'util'
+inspect = util.inspect
+util.inspect = (obj, opts) ->
+  inspect obj, _.defaults(opts, depth: null)
 
-apn = require 'apn'
-
-apnProvider = new apn.Provider
-  pfx: process.env.APNPFX
-  passphrase: process.env.APNPASS
-  production: false
-
-gcm = require 'node-gcm'
-
-gcmProvider = Promise.promisifyAll new gcm.Sender process.env.GCMKEY
-    
 module.exports =
   
   autoWatch: false
