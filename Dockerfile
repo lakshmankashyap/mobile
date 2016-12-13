@@ -1,11 +1,17 @@
 FROM node
 
-WORKDIR /usr/src/app
-ADD https://github.com/twhtanghk/mobile/archive/master.tar.gz /tmp
-RUN tar --strip-components=1 -xzf /tmp/master.tar.gz && \
-	rm /tmp/master.tar.gz && \
-	apt-get update && \
-	apt-get clean && \
-	npm install
+ENV VER=${VER:-master} \
+    REPO=https://github.com/twhtanghk/mobile \
+    APP=/usr/src/app
+
+WORKDIR $APP
+
+RUN apt-get update && \
+    apt-get install -y git && \
+    apt-get clean && \
+    git clone -b $VER $REPO $APP && \
+    npm install
+
 EXPOSE 1337
+
 CMD node app.js --prod
