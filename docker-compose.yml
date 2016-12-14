@@ -10,8 +10,6 @@ services:
       - 1337
     volumes:
       - ${COMPOSEROOT}/mobile/apn.p12:/usr/src/app/config/env/apn.p12
-      - /etc/ssl/certs:/etc/ssl/certs
-      - /usr/local/share/ca-certificates:/usr/local/share/ca-certificates
     env_file: 
       - ./.env
 
