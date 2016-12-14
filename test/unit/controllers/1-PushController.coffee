@@ -17,3 +17,19 @@ describe 'PushController', ->
                 title: 'Instant Messaging'
                 message: 'test message'
             .expect 200
+
+    it "push msg to all iPhone", ->
+      sails.services.oauth2
+        .token()
+        .then (token) ->
+          sails.models.device
+            .find model: like: 'iPhone%'
+            .populateAll()
+        .map (device) ->
+          device
+            .notify
+              title: 'Instant Messaging'
+              message: 'test message'
+            .catch (err) ->
+              sails.log.error "failed to send msg to #{device.createdBy.username}:#{device.model}:#{device.version}"
+              throw err
