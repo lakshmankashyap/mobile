@@ -25,6 +25,7 @@ module.exports =
         title: data.title
         body: data.message
         sound: 'default'
+        topic: data.topic || process.env.TOPIC
       apnProvider.send msg, device
     smtp: (email, data) ->
       smtp.sendMailAsync
