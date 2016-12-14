@@ -1,7 +1,7 @@
 {
   "name": "mobile",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Sails app to register mobile device with GCM or APN token, model, and version",
   "keywords": [],
   "dependencies": {
